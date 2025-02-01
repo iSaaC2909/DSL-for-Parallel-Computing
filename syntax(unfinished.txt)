@@ -1,0 +1,285 @@
+
+
+Keywords:	
+
+
+
+parallel: The most fundamental keyword.
+
+parallel <block of code>: Executes the code block concurrently.
+Example: parallel { ... }
+fork: Creates a new thread of execution.
+fork <block of code>: Starts a new thread to execute the given code.
+Example: fork { ... }
+join: Waits for a thread to finish.
+join <thread>: Blocks the current thread until the specified thread completes.
+Example: join thread1
+ 
+
+
+sync: Ensures all threads have reached a specific point before proceeding.
+sync : Pauses all threads until all threads have executed this statement.
+Data Parallelism:
+
+foreach: Iterates over a collection in parallel.
+foreach <item> in <collection> { ... }: Executes the code block for each item in the collection concurrently.
+Example: foreach i in [1, 2, 3] { ... }
+ 
+
+
+map: Applies a function to each element of a collection in parallel.
+map <function> <collection>: Returns a new collection where each element is the result of applying the function to the corresponding element of the input collection.
+Example: map(f, [1, 2, 3])
+ 
+
+
+Data Structures:
+
+shared: Declares a variable that is shared among all threads.
+shared <variable>: Makes the variable accessible to all threads.
+Example: shared count
+atomic: Ensures thread-safe access to a shared variable.
+atomic { ... }: Executes the code block within a critical section, preventing race conditions.
+Example: atomic { count += 1 }
+ 
+
+
+Task Scheduling:
+
+task: Defines an independent unit of work.
+task <name> { ... }: Creates a named task that can be executed independently.
+Example: task sort_data { ... }
+schedule: Submits a task for execution.
+schedule <task>: Submits a task to the task scheduler for execution.
+Example: schedule sort_data
+Considerations:
+
+Clarity and Conciseness: Choose keywords that are easy to understand and remember.
+Consistency: Maintain consistent naming conventions and grammar throughout the DSL.
+Flexibility: Allow for different levels of abstraction, from low-level thread management to high-level data parallelism.
+Error Handling: Consider keywords for error handling and debugging, such as try, catch, and assert.
+
+
+Control Flow
+
+if/else: Conditional execution.
+if (condition) { ... } else { ... }
+for: Looping with a counter.
+for (initialization; condition; increment) { ... }
+while: Looping as long as a condition is true.
+while (condition) { ... }
+do-while: Looping with a guaranteed first execution.
+do { ... } while (condition);
+switch: Multi-way branching based on a value.
+switch (value) { case 1: ...; break; case 2: ...; break; ... }
+break: Exits a loop or switch statement.
+continue: Skips the current iteration of a loop.
+Data Types
+
+int: Integer (whole numbers).
+float/double: Floating-point numbers (numbers with decimals).
+char: Single character.
+string: Sequence of characters.
+boolean: True or False.
+void: No return value.
+Variables and Scope
+
+int x; Declares an integer variable named 'x'.
+const int PI = 3.14159; Declares a constant variable.
+var myVariable; (In some languages) Declares a variable with inferred type.
+Functions
+
+function myFunction() { ... } or def myFunction(): ... (Python) Defines a function.
+return: Returns a value from a function.
+Object-Oriented Programming (OOP)
+
+class: Defines a class (blueprint for objects).
+object: An instance of a class.
+this/self: Refers to the current object.
+public/private/protected: Access modifiers for class members.
+inheritance: Deriving a new class from an existing one.
+polymorphism: Ability of objects to take on many forms.
+Memory Management
+
+new: Allocates memory dynamically.
+delete: Deallocates memory.
+Input/Output
+
+
+
+Datatypes:
+
+
+
+Primitives: Basic data types like int, float, char, boolean, etc. These are generally the same as in sequential programming, but their behavior in parallel contexts can differ.
+Arrays: Collections of elements of the same type. They are often used for data parallelism, where the same operation is performed on multiple elements concurrently.  
+
+
+
+Structures/Classes: Composite data types that group related data elements. They can be used to represent complex data structures in parallel algorithms.  
+
+
+2. Parallel-Specific Data Types
+
+Shared Memory: Data that is accessible by all threads in a shared memory system.
+Atomic Variables: Special variables that ensure thread-safe access and modification.  
+
+
+Locks/Mutexes: Mechanisms for controlling access to shared resources, preventing race conditions.  
+
+
+ 
+
+
+Message Passing: Data exchanged between processes in a distributed memory system.
+Buffers: Temporary storage for data to be sent or received.
+Channels/Queues: Data structures for passing messages between processes.
+3. Data Structures for Parallel Algorithms
+
+Queues: First-in, first-out (FIFO) data structures used for task scheduling and communication.  
+
+
+Stacks: Last-in, first-out (LIFO) data structures used for backtracking and depth-first search.  
+
+
+Trees: Hierarchical data structures used for efficient searching and sorting.  
+
+
+Graphs: Networks of nodes and edges representing relationships between data elements.
+4. Data Distribution Strategies
+
+Data Parallelism: Distributing data across multiple threads or processes, with each processing a subset of the data. 
+
+
+Task Parallelism: Distributing tasks across multiple threads or processes, with each performing a different operation.  
+
+
+Hybrid Parallelism: A combination of data and task parallelism.  
+
+
+5. Considerations for Parallel Data Types
+
+Memory Layout: How data is organized in memory can significantly impact performance.
+Data Locality: Keeping frequently accessed data close together in memory can improve performance.  
+
+
+Synchronization: Ensuring that data is accessed and modified in a consistent and predictable manner.  
+
+
+Data Alignment: Aligning data to memory boundaries can improve performance on some architectures.
+
+
+
+
+Memory management:
+
+
+
+In parallel computing, memory management becomes even more critical due to the presence of multiple threads or processes sharing resources. It's essential to ensure that data is accessed and modified correctly and efficiently.
+
+Challenges in Parallel Memory Management
+
+Race Conditions: Multiple threads accessing and modifying shared memory concurrently can lead to unpredictable results.
+Deadlocks: A situation where two or more threads are blocked indefinitely, waiting for resources held by each other.
+Memory Leaks: Unreleased memory can lead to performance degradation and even program crashes.
+False Sharing: When unrelated data is located in the same cache line, causing unnecessary cache invalidations and slowing down execution.
+Techniques for Parallel Memory Management
+
+Shared Memory:
+Atomic Operations: Ensure that operations on shared variables are indivisible and cannot be interrupted by other threads.
+Locks/Mutexes: Provide exclusive access to shared resources, preventing race conditions.
+Barriers: Synchronize threads at specific points, ensuring that all threads have reached a certain point before proceeding.
+Condition Variables: Allow threads to wait for a specific condition to become true.
+Distributed Memory:
+Message Passing: Data is exchanged between processes using explicit send and receive operations.
+Remote Memory Access (RMA): Allows processes to directly access memory in other processes' address spaces.
+Memory Allocation:
+Preallocation: Allocate memory upfront to avoid dynamic allocation overhead.
+Memory Pools: Create pools of pre-allocated memory blocks to reduce fragmentation and improve allocation performance.
+Memory Mapping: Map files or other data structures directly into memory for efficient access.
+Tools and Libraries
+
+OpenMP: A set of compiler directives for parallel programming in C, C++, and Fortran.
+MPI (Message Passing Interface): A standard for message passing between processes.
+CUDA: A parallel computing platform and programming model developed by NVIDIA.
+OpenCL: A framework for writing and executing programs on heterogeneous computing systems.
+
+
+Functions:
+
+
+
+Key Concepts
+
+Definition: A function is defined with a name, a list of parameters (optional), and a block of code that executes when the function is called.
+Parameters: These are input values that the function can receive. They act as placeholders for data that will be used within the function's logic.
+Arguments: The actual values that are passed to a function when it is called.
+Return Value: A function can optionally return a value as a result of its execution. This value can be used by the code that called the function.
+Benefits of Using Functions
+
+Reusability: Once defined, a function can be called multiple times throughout your program, avoiding code duplication.
+Modularity: Functions break down complex problems into smaller, more manageable units.
+Readability: By giving meaningful names to functions, you improve the readability and maintainability of your code.
+Organization: Functions help to organize code into logical units, making it easier to understand and debug.
+Abstraction: Functions hide the internal implementation details, allowing you to focus on what the function does, rather than how it does it.
+
+
+Conditions(if, switch):
+
+Loops:
+
+Exceptions:
+
+Encapsulation:
+
+Break, continue:
+
+Abstraction:
+
+Variable:
+
+Input output:
+
+Error handling:
+
+Performance:
+
+Comments:
+
+Data structures:
+
+Recursion:
+
+Class and objects:
+
+Inheritance:
+
+Polymorphism:
+
+Libraries:
+
+Boolean:
+
+Packages:
+
+Enums:
+
+Algorithms:
+
+TypeCasting:
+
+Methods:
+
+
+
+Staticly typed:
+
+let: Variable declaration.
+
+func: Function definition.
+
+if, else, elif: Conditional statements.
+
+for, while, do: Looping constructs.
+
+return: Return value from a function.
