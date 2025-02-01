@@ -1,0 +1,12 @@
+# depslib dependency file v1.0
+1468750161 source:c:\users\deador\documents\acm\lexicalanalyzer\main.cpp
+	<bits/stdc++.h>
+
+1466130307 c:\users\deador\documents\acm\lexicalanalyzer\lib\sets.h
+	<bits/stdc++.h>
+
+1466915768 c:\users\deador\documents\acm\lexicalanalyzer\lib\util.h
+	"lib/dfa.h"
+
+1469689479 source:c:\users\deador\documents\acm\lexicalanalyzer\lexer\main.cpp
+	<bits/stdc++.h>
